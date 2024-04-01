@@ -49,11 +49,13 @@ export default {
   },
   methods: {
     refreshVdnDetails() {
-      VdnDataService.retrieveVdn(this.id).then((res) => {
-        this.vdnNum = res.data.vdnNum;
-        this.vdnName = res.data.vdnName;
-        this.updateAt = res.data.updateAt;
-      });
+      if(this.id != -1){
+        VdnDataService.retrieveVdn(this.id).then((res) => {
+          this.vdnNum = res.data.vdnNum;
+          this.vdnName = res.data.vdnName;
+          this.updateAt = res.data.updateAt;
+        });
+      }
     },
     validateAndSubmit(e) {
       e.preventDefault();

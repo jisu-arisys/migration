@@ -1,24 +1,54 @@
 <template>
-  <div class="container">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand" href="#">M IVR</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div class="navbar-nav">
-          <a class="nav-item nav-link active" href="/v">Home <span class="sr-only">(current)</span></a>
-          <a class="nav-item nav-link" href="/v">Vdn관리</a>
-          <a class="nav-item nav-link" href="/u">사용자관리</a>
-        </div>
-      </div>
-    </nav>
-    <router-view/>
+  <div :class="{'nav-open': $sidebar.showSidebar}">
+    <dash-layout></dash-layout>
+  </div>
+  <div class="main-panel">
+    <top-navbar></top-navbar>
+    <router-view></router-view> 
   </div>
 </template>
 
 <script>
+import TopNavbar from './components/TopNavbar.vue';
+// import SideBar from './sidebarPlug/SideBar.vue';
+// import SidebarLink from './sidebarPlug/SidebarLink.vue';
+import DashLayout from './pages/DashLayout.vue';
+
 export default {
   name: "app",
+  components : {
+    // SideBar, SidebarLink,
+    TopNavbar, 
+    DashLayout
+  }
 };
 </script>
+
+<style lang="scss">
+  .vue-notifyjs.notifications{
+    .list-move {
+      transition: transform 0.3s, opacity 0.4s;
+    }
+    .list-item {
+      display: inline-block;
+      margin-right: 10px;
+
+    }
+    .list-enter-active {
+      transition: transform 0.2s ease-in, opacity 0.4s ease-in;
+    }
+    .list-leave-active {
+      transition: transform 1s ease-out, opacity 0.4s ease-out;
+    }
+
+    .list-enter {
+      opacity: 0;
+      transform: scale(1.1);
+
+    }
+    .list-leave-to {
+      opacity: 0;
+      transform: scale(1.2, 0.7);
+    }
+  }
+</style>

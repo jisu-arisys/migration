@@ -49,11 +49,13 @@ export default {
   },
   methods: {
     refreshUserDetails() {
-      UserDataService.retrieveUser(this.id).then((res) => {
-        this.firstName = res.data.firstName;
-        this.lastName = res.data.lastName;
-        this.emailId = res.data.emailId;
-      });
+      if(this.id != -1){
+        UserDataService.retrieveUser(this.id).then((res) => {
+          this.firstName = res.data.firstName;
+          this.lastName = res.data.lastName;
+          this.emailId = res.data.emailId;
+        });
+      }
     },
     validateAndSubmit(e) {
       e.preventDefault();

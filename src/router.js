@@ -2,24 +2,37 @@ import { createWebHistory, createRouter } from "vue-router";
 
 const routes =  [
     {
+        path: '/',
+        name: "Users1",
+        component : () => import("./pages/Users"),
+        // redirect: '/admin/overview',
+        // children:[
+        //   {
+        //     path: 'login',
+        //     name: 'Login',
+        //     component: Login
+        //   },
+        // ]
+      },
+    {
         path: "/u",
         name: "Users",
-        component: () => import("./components/Users"),
+        component: () => import("./pages/Users"),
     },
     {
         path: "/user/:id",
         name: "User",
-        component: () => import("./components/User"),
+        component: () => import("./pages/User"),
     },
     {
         path: "/v",
         name: "Vdns",
-        component: () => import("./components/Vdns"),
+        component: () => import("./pages/Vdns"),
     },
     {
         path: "/vdn/:id",
         name: "Vdn",
-        component: () => import("./components/Vdn"),
+        component: () => import("./pages/Vdn"),
     },
 ];
 
