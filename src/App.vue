@@ -18,27 +18,24 @@
 
 <script>
   import SideBar from './sidebarPlug/SideBar.vue';
-  // import SidebarLink from './sidebarPlug/SidebarLink.vue';
-
   import TopNavbar from './components/TopNavbar.vue';
   import ContentFooter from './components/ContentFooter.vue';
 
 export default {
   name: "app",
   components : {
-    SideBar, 
-    // SidebarLink,
+    SideBar,
     TopNavbar, ContentFooter
   },
   data(){
     return {
       sidebarLinks : [
-        { name: 'Dashboard', icon: 'ti-panel', path: '/' },
-        { name: 'User list', icon: 'ti-user', path: '/u' },
-        { name: 'Customer list', icon: 'ti-user', path: '/v' },
+        { name: 'Dashboard', icon: 'nc-icon nc-air-baloon', path: '/' },
+        { name: 'User list', icon: 'nc-icon nc-circle-09', path: '/u' },
+        { name: 'Customer list', icon: 'nc-icon nc-bank', path: '/v' },
     ]
     }
-  }
+  },
 };
 </script>
 

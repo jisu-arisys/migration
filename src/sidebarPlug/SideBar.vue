@@ -13,7 +13,9 @@
         </a>
       </div>
 
-      <slot name="content"></slot>
+      <slot name="content">
+        <mobile-menu></mobile-menu>
+      </slot>
       <ul class="nav nav-main__links">
         <!--By default vue-router adds an active class to each route link. This way the links are colored when clicked-->
         <slot>
@@ -36,10 +38,12 @@
 </template>
 <script>
   import SidebarLink from './SidebarLink.vue'
+  import MobileMenu from './MobileMenu.vue';
+
 
   export default {
     components: {
-      SidebarLink
+      SidebarLink, MobileMenu
     },
     props: {
       title: {

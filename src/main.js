@@ -21,11 +21,7 @@ app.use(router);
 const sidebarStore = ref({
   showSidebar: false,
   sidebarLinks: [
-    // {
-    //   name: 'Dashboard',
-    //   icon: 'ti-panel',
-    //   path: '/admin/overview'
-    // }
+
   ],
   // 외부에서 값을 변경하기 위한 displaySidebar 메서드를 정의합니다.
   displaySidebar(value) {
