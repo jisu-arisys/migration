@@ -15,7 +15,9 @@
       <div class="main-panel">
         <top-navbar></top-navbar>
         <div class="content">
-          <router-view></router-view>
+          <div class="container-fluid">
+            <router-view></router-view>
+          </div>
         </div>
       </div>
     </div>
