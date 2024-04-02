@@ -3,17 +3,9 @@ import { createWebHistory, createRouter } from "vue-router";
 const routes =  [
     {
         path: '/',
-        name: "Users1",
-        component : () => import("./pages/Users"),
-        // redirect: '/admin/overview',
-        // children:[
-        //   {
-        //     path: 'login',
-        //     name: 'Login',
-        //     component: Login
-        //   },
-        // ]
-      },
+        name: "Dash",
+        component: () => import("./pages/DashBoard"),
+    },
     {
         path: "/u",
         name: "Users",

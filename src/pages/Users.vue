@@ -57,7 +57,7 @@
         });
       },
       addUser() {
-        this.$router.push(`/user/-1`);
+        this.$router.push("/user/-1");
       },
       updateUser(id) {
         this.$router.push(`/user/${id}`);

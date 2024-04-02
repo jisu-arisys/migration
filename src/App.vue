@@ -1,25 +1,38 @@
 <template>
   <div :class="{'nav-open': $sidebar.showSidebar}">
-    <dash-layout></dash-layout>
-  </div>
-  <div class="main-panel">
-    <top-navbar></top-navbar>
-    <router-view></router-view> 
+    <div class="wrapper">
+      <side-bar>
+        <sidebar-link to="/">
+          <p>Dashboard</p>
+        </sidebar-link>
+        <sidebar-link to="/u">
+          <p>User list</p>
+        </sidebar-link>
+        <sidebar-link to="/v">
+          <p>Customer list</p>
+        </sidebar-link>
+      </side-bar>
+      <div class="main-panel">
+        <top-navbar></top-navbar>
+        <div class="content">
+          <router-view></router-view>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import TopNavbar from './components/TopNavbar.vue';
-// import SideBar from './sidebarPlug/SideBar.vue';
-// import SidebarLink from './sidebarPlug/SidebarLink.vue';
-import DashLayout from './pages/DashLayout.vue';
+  import SideBar from './sidebarPlug/SideBar.vue';
+  import SidebarLink from './sidebarPlug/SidebarLink.vue';
+
+  import TopNavbar from './components/TopNavbar.vue';
 
 export default {
   name: "app",
   components : {
-    // SideBar, SidebarLink,
-    TopNavbar, 
-    DashLayout
+    SideBar, SidebarLink,
+    TopNavbar,   
   }
 };
 </script>

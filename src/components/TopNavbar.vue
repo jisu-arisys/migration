@@ -1,23 +1,25 @@
 <template>
-      <nav class="navbar navbar-expand-lg">
-        <div class="container-fluid">
+  <div>
+
+    <nav class="navbar navbar-expand-lg">
+      <div class="container-fluid">
           <a class="navbar-brand" href="#">{{routeName}}</a>
           <button type="button"
-                  class="navbar-toggler navbar-toggler-right"
-                  :class="{toggled: $sidebar.showSidebar}"
-                  aria-controls="navigation-index"
-                  aria-expanded="false"
-                  aria-label="Toggle navigation"
-                  >
-            <span class="navbar-toggler-bar burger-lines"></span>
-            <span class="navbar-toggler-bar burger-lines"></span>
-            <span class="navbar-toggler-bar burger-lines"></span>
-          </button>
-          <div class="collapse navbar-collapse justify-content-end">
-            <ul class="navbar-nav ml-auto" >
-              <li v-if="isLoggedIn" class="nav-item">
-                <a >{{ userId }}
-                </a>
+          class="navbar-toggler navbar-toggler-right"
+          :class="{toggled: $sidebar.showSidebar}"
+          aria-controls="navigation-index"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+          >
+          <span class="navbar-toggler-bar burger-lines"></span>
+          <span class="navbar-toggler-bar burger-lines"></span>
+          <span class="navbar-toggler-bar burger-lines"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end">
+          <ul class="navbar-nav ml-auto" >
+            <li v-if="isLoggedIn" class="nav-item">
+              <a >{{ userId }}
+              </a>
                 <a @click="logOut" class="nav-link">
                   Log out
                 </a>
@@ -33,13 +35,13 @@
           </div>
         </div>
       </nav>
+    </div>
 </template>
 <script>
   export default {
     computed: {
       routeName () {
-        const {name} = this.$route.name
-        return name;
+        return this.$route.name || ''
       },
       isLoggedIn() {
         // console.log("isLoggedIn"+this.$store.getters.isLoggedIn);

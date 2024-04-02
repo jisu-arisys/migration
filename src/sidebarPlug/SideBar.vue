@@ -8,7 +8,7 @@
         <a href="#" class="simple-text logo__container">
             <div class="title-img">
                 <!-- <img src="img/vue-logo.png" alt=""> -->
-                <img src="img/U BASE_CI(흰색).png" alt="">
+                <img src="../../public/img/U BASE_CI(흰색).png" alt="">
             </div>
           {{title}}
         </a>
