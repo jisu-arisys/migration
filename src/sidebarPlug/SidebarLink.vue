@@ -13,7 +13,7 @@
 </template>
 <script>
   export default {
-    inheritAttrs: false,
+    // inheritAttrs: false,
     inject: {
       autoClose: {
         default: true

@@ -2,7 +2,7 @@
   <div :class="{'nav-open': $sidebar.showSidebar}">
     <div class="wrapper">
       <side-bar>
-        <sidebar-link to="/">
+        <sidebar-link to="/" class="active">
           <p>Dashboard</p>
         </sidebar-link>
         <sidebar-link to="/u">
@@ -19,6 +19,7 @@
             <router-view></router-view>
           </div>
         </div>
+        <content-footer></content-footer>
       </div>
     </div>
   </div>
@@ -29,12 +30,13 @@
   import SidebarLink from './sidebarPlug/SidebarLink.vue';
 
   import TopNavbar from './components/TopNavbar.vue';
+  import ContentFooter from './components/ContentFooter.vue';
 
 export default {
   name: "app",
   components : {
     SideBar, SidebarLink,
-    TopNavbar,   
+    TopNavbar, ContentFooter
   }
 };
 </script>
