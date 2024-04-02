@@ -7,7 +7,6 @@
       <div class="logo">
         <a href="#" class="simple-text logo__container">
             <div class="title-img">
-                <!-- <img src="img/vue-logo.png" alt=""> -->
                 <img src="../../public/img/U BASE_CI(흰색).png" alt="">
             </div>
           {{title}}
@@ -21,8 +20,9 @@
           <sidebar-link v-for="(link,index) in sidebarLinks"
                         :key="link.name + index"
                         :to="link.path"
-                        @click="closeNavbar"
-                        :link="link">
+                        @click="handleSidebarLinkClick(link.name)"
+                        :link="link"
+                        :class="activeLink===link.name?'active':''">
             <i :class="link.icon"></i>
             <p>{{link.name}}</p>
           </sidebar-link>
@@ -80,11 +80,22 @@
         autoClose: this.autoClose
       }
     },
+    data(){
+      return {
+        activeLink: null
+      }
+    },
     computed: {
       sidebarStyle () {
         return {
           backgroundImage: `url(${this.backgroundImage})`
         }
+      },
+    },
+    methods : {
+      handleSidebarLinkClick(linkName) {
+        this.activeLink = linkName;
+        // console.log(this.activeLink);
       }
     }
   }

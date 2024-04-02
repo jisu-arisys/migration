@@ -1,16 +1,7 @@
 <template>
   <div :class="{'nav-open': $sidebar.showSidebar}">
     <div class="wrapper">
-      <side-bar>
-        <sidebar-link to="/" class="active">
-          <p>Dashboard</p>
-        </sidebar-link>
-        <sidebar-link to="/u">
-          <p>User list</p>
-        </sidebar-link>
-        <sidebar-link to="/v">
-          <p>Customer list</p>
-        </sidebar-link>
+      <side-bar :sidebarLinks="sidebarLinks">
       </side-bar>
       <div class="main-panel">
         <top-navbar></top-navbar>
@@ -27,7 +18,7 @@
 
 <script>
   import SideBar from './sidebarPlug/SideBar.vue';
-  import SidebarLink from './sidebarPlug/SidebarLink.vue';
+  // import SidebarLink from './sidebarPlug/SidebarLink.vue';
 
   import TopNavbar from './components/TopNavbar.vue';
   import ContentFooter from './components/ContentFooter.vue';
@@ -35,8 +26,18 @@
 export default {
   name: "app",
   components : {
-    SideBar, SidebarLink,
+    SideBar, 
+    // SidebarLink,
     TopNavbar, ContentFooter
+  },
+  data(){
+    return {
+      sidebarLinks : [
+        { name: 'Dashboard', icon: 'ti-panel', path: '/' },
+        { name: 'User list', icon: 'ti-user', path: '/u' },
+        { name: 'Customer list', icon: 'ti-user', path: '/v' },
+    ]
+    }
   }
 };
 </script>
