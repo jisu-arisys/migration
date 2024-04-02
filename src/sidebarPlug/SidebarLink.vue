@@ -1,19 +1,21 @@
 <template>
-  <component :is="tag"
-             @click="hideSidebar"
-             v-bind="$attrs"
-             tag="li">
-    <a class="nav-link" v-bind="$attrs">
+  <li class="router-link-active router-link-exact-active">
+    <component :is="tag"
+    @click="hideSidebar"
+    v-bind="$attrs"
+    >
+    <a class="nav-link" v-bind="$attrs" >
       <slot>
         <i v-if="link.icon" :class="link.icon"></i>
         <p>{{link.name}}</p>
       </slot>
     </a>
   </component>
+</li>
 </template>
 <script>
   export default {
-    // inheritAttrs: false,
+    // inheritAttrs: true,
     inject: {
       autoClose: {
         default: true
@@ -33,6 +35,7 @@
       tag: {
         type: String,
         default: 'router-link'
+        // default: 'li'
       }
     },
     methods: {
