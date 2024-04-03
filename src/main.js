@@ -12,7 +12,7 @@ import dayjs from "dayjs"
 import createCalculator from "./module/dateCalculator" //dayjs : 사용자 정의 계산식 함수가 포함된 .js 호출
 import createfilters from "./module/filters" //사용자정의 테이블 옵션, 필터링, 페이징 함수가 포함된 .js 호출
 
-import Card from './globalComponent/Card.vue'
+import globalComponet from './globalComponent/globalComponet'
 
 import {pinia} from './module/pinia'
 import { createPersistPlugin } from 'pinia-persist-plugin'
@@ -23,7 +23,7 @@ pinia.use(persistPlugin);
 const app = createApp(App)
 app.use(router)
 app.use(pinia)
-app.component('Card',Card)
+app.use(globalComponet)
 
 // sidebarStore를 ref로 반응성 객체를 정의합니다.
 const sidebarStore = ref({

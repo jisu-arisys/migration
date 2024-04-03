@@ -9,7 +9,7 @@
     </thead>
     <tbody>
     <tr v-for="(item, index) in data" :key="index">
-      <slot :row="item" v-if="hasValue(item, column)">
+      <slot :row="item">
         <td v-for="column in columns" :key="column" @click="handleColumnClick(item)">{{itemValue(item, column)}}</td>
       </slot>
     </tr>
@@ -18,17 +18,14 @@
 </template>
 <script>
   export default {
-    name: 'l-table',
+    name: 'table-basic',
     props: {
       columns: Array,
       data: Array
     },
     methods: {
-      hasValue (item, column) {
-        return item[column.toLowerCase()] !== 'undefined'
-      },
       itemValue (item, column) {
-        return item[column.toLowerCase()]
+        return item[column]
       },
       handleColumnClick(item) {
       this.$emit('handle', item);

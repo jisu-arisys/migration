@@ -8,26 +8,36 @@
       <card class="strpied-tabled-with-hover"
       body-classes="table-full-width table-responsive"
       >
-      <u-table class="table-hover table-striped"
+      <table-basic class="table-hover table-striped"
         :columns="table1.columns"
         :data="table1.data"
-        @edit="updateCustomer"
-        @del="deleteCustomer"
         >
-      </u-table>  
+      </table-basic>
+      <!-- <l-table class="table-hover table-striped"
+              :columns="table1.columns"
+              :data="table1.data"
+              @handle="togleGroup">
+            </l-table>   -->
       </card>
     </div>
   </div>
+  <div class="row">
+    <time-radio id="monday" :openingTime="open" :closingTime="close" @hours="setHolyHours"></time-radio>
+    <base-input label="Customer" v-model="table1.data[0].customer"></base-input>
+      {{ test }}
+    <br>
+    {{ table1.data }}  
+  </div>
 </template>
 <script>
-import UTable from '../components/TableUpdateDelete.vue';
 const tableColumns = ['id', 'customer', 'group','vdn', 'updateat']
   export default {
-    components : {
-    UTable
-    },
     data () {
       return {
+        open : '09:00',
+        close : '18:00',
+        isHoly : true,
+        test : 'test',
         table1: {
           columns: [...tableColumns],
           data: [{
@@ -68,6 +78,12 @@ const tableColumns = ['id', 'customer', 'group','vdn', 'updateat']
       }
     },
     methods : {
+      setHolyHours(id, openingTime, closingTime, isHoly) {
+        this.open = openingTime;
+        this.close = closingTime;
+        this.isHoly = isHoly;
+        console.log(id, isHoly);
+    },
       addCustomer(){
         if(confirm("고객사를 추가하시겠습니까?")){
           this.$router.push("/admin/customerupdate/-1");
