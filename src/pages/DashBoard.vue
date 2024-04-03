@@ -8,18 +8,24 @@
       <card class="strpied-tabled-with-hover"
       body-classes="table-full-width table-responsive"
       >
-      <table-basic class="table-hover table-striped"
+      <u-table class="table-hover table-striped"
+        :columns="table1.columns"
+        :data="table1.data"
+        @edit="updateCustomer"
+        @del="deleteCustomer"
+        >
+      </u-table>
+      <l-table class="table-hover table-striped"
         :columns="table1.columns"
         :data="table1.data"
         >
-      </table-basic>
-      <!-- <l-table class="table-hover table-striped"
-              :columns="table1.columns"
-              :data="table1.data"
-              @handle="togleGroup">
-            </l-table>   -->
+      </l-table>
+        
       </card>
     </div>
+  </div>
+  <div class="col-3">
+    {{ isHoly }}
   </div>
   <div class="row">
     <time-radio id="monday" :openingTime="open" :closingTime="close" @hours="setHolyHours"></time-radio>

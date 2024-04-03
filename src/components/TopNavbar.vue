@@ -46,9 +46,9 @@ export default {
     const user = useUserStore()
     const userId = ref(user.getUserId);
     const isLoggedIn = ref(user.getIsLoggedIn);
-    console.log(userId.value);
-    console.log(isLoggedIn.value);
-    console.log(user);
+    // console.log(userId.value);
+    // console.log(isLoggedIn.value);
+    // console.log(user);
 
     const logoutFunc = () => {
       user.logout();
