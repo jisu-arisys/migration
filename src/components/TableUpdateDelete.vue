@@ -14,7 +14,7 @@
     </thead>
     <tbody>
     <tr v-for="(item, index) in data" :key="index">
-      <slot :row="item" v-if="hasValue(item, column)">
+      <slot :row="item">
         <td v-for="column in columns" :key="column" @click="handleColumnClick(index)"
         style="min-width: 60px;"
         > {{itemValue(item, column)}}</td>
