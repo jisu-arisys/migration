@@ -14,9 +14,16 @@ import createfilters from "./module/filters" //사용자정의 테이블 옵션,
 
 import Card from './globalComponent/Card.vue'
 
+import {pinia} from './module/pinia'
+import { createPersistPlugin } from 'pinia-persist-plugin'
+
+const persistPlugin = createPersistPlugin();
+pinia.use(persistPlugin);
+
 const app = createApp(App)
 app.use(router)
-app.component('Card', Card)
+app.use(pinia)
+app.component('Card',Card)
 
 // sidebarStore를 ref로 반응성 객체를 정의합니다.
 const sidebarStore = ref({
@@ -30,7 +37,6 @@ const sidebarStore = ref({
   }
 })
 
-// app.config.globalProperties에 $sidebar를 설정합니다.
 app.config.globalProperties.$sidebar = {
   get showSidebar() {
     return sidebarStore.value.showSidebar;
@@ -42,11 +48,8 @@ app.config.globalProperties.$sidebar = {
     sidebarStore.value.displaySidebar(value);
   }
 }
-
 app.config.globalProperties.$dayjs = dayjs
 app.config.globalProperties.$cal = createCalculator(dayjs)
 app.config.globalProperties.$filter = createfilters()
-
-
 
 app.mount('#app')

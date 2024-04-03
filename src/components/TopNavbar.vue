@@ -25,8 +25,6 @@
                 </a>
               </li>
               <li v-else class="nav-item" >
-                <strong >{{ userId }}
-                </strong>
                 <a @click="logOut" class="nav-link">
                   <strong>Sign In</strong>
                 </a>
@@ -37,20 +35,32 @@
       </nav>
     </div>
 </template>
+
+
 <script>
-  export default {
+import {useUserStore} from '../module/pinia';
+import { ref } from 'vue';
+
+export default {
+  setup(){ 
+    const user = useUserStore()
+    const userId = ref(user.getUserId);
+    const isLoggedIn = ref(user.getIsLoggedIn);
+    console.log(userId.value);
+    console.log(isLoggedIn.value);
+    console.log(user);
+
+    const logoutFunc = () => {
+      user.logout();
+      userId.value = user.getUser
+      isLoggedIn.value = user.getIsLoggedIn
+    };
+
+    return {userId, isLoggedIn, logoutFunc}
+    },
     computed: {
       routeName () {
         return this.$route.name || ''
-      },
-      isLoggedIn() {
-        // console.log("isLoggedIn"+this.$store.getters.isLoggedIn);
-        // return this.$store.getters.isLoggedIn;
-        return true;
-      },
-      userId() {
-        // return this.$store.getters.userId;
-        return 'user';
       },
     },
     data () {
@@ -72,7 +82,7 @@
         this.$sidebar.displaySidebar(false)
       },
       logOut(){
-        // this.$store.dispatch('logout');
+        this.logoutFunc();
         this.$router.push("/login");
       },
     }
