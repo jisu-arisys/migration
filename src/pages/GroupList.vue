@@ -5,33 +5,26 @@
         <h4 class="card-title">고객사 그룹별 일정관리</h4>
         <p class="card-category">등록된 고객사 목록을 표시하고 영업일정을 수정 할 수 있는 페이지.</p>
       </slot>
-      <div class="d-flex  p-2">
-        <div class="col-11 ms-auto">
-          <label>
-            고객사
+      <div class="d-flex p-2">
+        <div class="col-10">
+          <label>고객사
             <select v-model="filterOrder.customer" class="bg-gray-800 hover:bg-gray-700 border border-gray-700 px-4 py-2">
               <option v-for="(option, index) in extractCustomers" :key="'customer' +index" :value="option">{{ option || '전체' }}</option>
             </select>
           </label>
           &nbsp;&nbsp;
-          <label>
-            그룹
+          <label>그룹
             <select v-model="filterOrder.group" class="bg-gray-800 hover:bg-gray-700 border border-gray-700 px-4 py-2">
               <option v-for="(option, index) in extractGroups" :key="'group' +index" :value="option">{{ option || '전체' }}</option>
             </select>
           </label>
           &nbsp;&nbsp;
-          <label>
-            검색
+          <label>검색
             <input type="text" size="15" v-model="filterOrder.keyword" class="bg-gray-800 hover:bg-gray-700 border border-gray-700 px-4 py-2"/>
           </label>
-        </div>
-        <div class="col-1">
-          <label>
-            <button class="btn float-end btn-success" @click="addGroup()">
-              Add
-            </button>
-          </label>
+        </div>         
+        <div class="col-2">
+          <button class="btn float-end btn-success" @click="addGroup()">Add</button>
         </div>
       </div>
     </div>
@@ -51,134 +44,49 @@
         
         <div class="col-md-5">          
           <card>
-            <div class="row">
-              <div class="col-md-4">
-                <label>Details</label>
-              </div>
-              <div class="col-md-8" v-if=expandedData>
-                <button class="btn float-end btn-danger btn-sm" @click="deleteGroup()">
-                  Delete
-                </button>
-              </div>
-            </div>
+            <detail-item label="Details">
+              <button v-if=expandedData class="btn float-end btn-danger btn-sm" @click="deleteGroup()">Delete</button>
+            </detail-item>
 
             <div v-if=expandedData>
-              <div class="row">
-                <div class="col-md-4">
-                  <label>Customer</label>
-                </div>
-                <div class="col-md-8">
-                  {{ expandedData.customer }}
-                </div>
-              </div>
+              <detail-item label="Customer">{{ expandedData.customer }}</detail-item>
+              <detail-item label="Group">{{ expandedData.group }}</detail-item>
               
-              <div class="row">
-                <div class="col-md-4">
-                  <label>Group</label>
-                </div>
-                <div class="col-md-8">
-                  {{ expandedData.group }}
-                </div>
-              </div>
+              <hr class="col-12">
               
-              <div class="row">
-                <div class="col-12"> <hr> </div>
-              </div>
-              
-              <div class="row">
-              <div class="col-md-4">
-                <label>영업시간</label>
-              </div>
-              <div class="col-md-8">
-                <button class="btn float-end btn-warning btn-sm" @click="updateTime()">
-                  Update
-                </button>
-              </div>
-            </div>
-
-            <div class="row">
-              <div class="col-md-4">
-                <label>월요일 ~ 금요일</label>
-              </div>
-              <div class="col-md-8">
+              <detail-item label="영업시간">
+                <button class="btn float-end btn-warning btn-sm" @click="updateTime()">Update</button>
+              </detail-item>
+              <detail-item label="월요일 ~ 금요일">
                 <span v-if="expandedData.businessHours.monday.isHoly">휴일</span>
                 <span v-else-if="expandedData.businessHours.monday.is24">24시간</span>
                 <span v-else>{{ expandedData.businessHours.monday.openingTime +' ~ '+expandedData.businessHours.monday.closingTime }}</span>
-              </div>
-            </div>
-            
-            <div class="row">
-              <div class="col-md-4">
-                <label>토요일</label>
-              </div>
-              <div class="col-md-8">
+              </detail-item>
+              <detail-item label="토요일">
                 <span v-if="expandedData.businessHours.saturday.isHoly">휴일</span>
                 <span v-else-if="expandedData.businessHours.saturday.is24">24시간</span>
                 <span v-else>{{ expandedData.businessHours.saturday.openingTime +' ~ '+expandedData.businessHours.saturday.closingTime }}</span>
-              </div>
-            </div>
-            
-            <div class="row">
-              <div class="col-md-4">
-                <label>일요일</label>
-              </div>
-              <div class="col-md-8">
+              </detail-item>
+              <detail-item label="일요일">
                 <span v-if="expandedData.businessHours.monday.isHoly">휴일</span>
                 <span v-else-if="expandedData.businessHours.monday.is24">24시간</span>
                 <span v-else>{{ expandedData.businessHours.monday.openingTime +' ~ '+expandedData.businessHours.monday.closingTime }}</span>
-              </div>
-            </div>
-            
-            <div class="row">
-              <div class="col-12"> <hr> </div>
-            </div>
+              </detail-item>
 
-            <div class="row">
-              <div class="col-md-4">
-                <label>휴일</label>
-              </div>
-              <div class="col-md-8">
-                <button class="btn float-end btn-warning btn-sm" @click="updateHoly()">
-                  Update
-                </button>
-              </div>
-            </div>
-            
-            
-            <div class="row">
-              <div class="col-md-4">
-                <label>공휴일 여부</label>
-              </div>
-              <div class="col-md-8">
-                <span>
-                  {{ expandedData.isPublicHoliday }}
-                </span>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-4">
-                <label>정기휴일</label>
-              </div>
-
-              <div class="col-md-8">
-                <p class="my-2" v-for="(item,index) in expandedData.holidays" :key="'holy'+index">
-                  {{ item }}
-                </p>
-              </div>
-            </div>
-            
-            <div class="row">
-              <div class="col-md-4">
-                <label>임시휴일</label>
-              </div>
-
-              <div class="col-md-8">
-              <p v-for="index in 3" :key="index">
-                {{ expandedData.tempholidays[index] }}
-              </p>
-              </div>
-            </div>
-
+              <hr class="col-12">
+              
+              <detail-item label="휴일">
+                <button class="btn float-end btn-warning btn-sm" @click="updateHoly()">Update</button>
+              </detail-item>
+              <detail-item label="공휴일 여부">
+                <span>{{ expandedData.isPublicHoliday }}</span>
+              </detail-item>
+              <detail-item label="정기휴일">
+                <p class="my-2" v-for="(item,index) in expandedData.holidays" :key="'holy'+index">{{ item }}</p>
+              </detail-item>
+              <detail-item label="임시휴일">
+                <p v-for="index in 3" :key="index">{{ expandedData.tempholidays[index] }}</p>
+              </detail-item>
           </div>
         </card>
       </div>
@@ -186,6 +94,7 @@
   </card>
 </template>
 <script>
+import DetailItem from '../components/DetailItem.vue';
   const headerColumns = ['','', '', '' ,'┌  fulltime',' -----------------┐','┌  shorttime','------------------┐','','']
   const tableColumns = ['Id','customer', 'group', 'Vdn' ,'updateat']
   const tableData = [
@@ -385,6 +294,9 @@
 
 ]
   export default {
+    components:{
+      DetailItem
+    },
     data () {
       return {
         table1: {
