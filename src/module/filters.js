@@ -6,7 +6,10 @@ export default function createfilters() {
     return data.filter(row => {
       return keywords.every(keyword => {
         return filterProps.some(prop => {
-          return keyword ? row[prop].toLowerCase().includes(keyword.toLowerCase()) : true;
+          const propValue = row[prop];
+          if( typeof propValue === 'string'){ 
+            return keyword ? propValue.toLowerCase().includes(keyword.toLowerCase()) : true;
+          }
         });
       });
     });
