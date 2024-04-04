@@ -1,36 +1,28 @@
 <template>
-  <div class="content">
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-12">
-          <card class="strpied-tabled-with-hover"
-          body-classes="table-full-width table-responsive"
-          >
-          <div class="p-3">
-            <div class="header">
-              <h4 class="card-title">사용자 관리</h4>
-              <p class="card-category">수정된 사용자 목록을 표시하고 관리할 수 있는 페이지.12명 이상이면 스크롤 발생</p>
-            </div>
-            <label class="p-3">
-              검색
-              <input type="text" size="15" v-model="filterOrder.keyword" class="bg-gray-800 hover:bg-gray-700 border border-gray-700 px-4 py-2"/>
-            </label>
-            <button class="btn float-end btn-success btn-sm" @click="addUser()">
-              Add
-            </button>
-          </div>
-            <u-table class="table-hover table-striped"
-                     :columns="table1.columns"
-                     :data="table1.data"
-                     @edit="updateUser"
-                     @del="deleteUser">
-            </u-table>
-            <page-button :max-page="maxPage" v-model="currentPage" ></page-button>
-          </card>
-        </div>
+  <card class="strpied-tabled-with-hover"
+  body-classes="table-full-width table-responsive"
+  >
+    <div class="p-3">
+      <div class="header">
+        <h4 class="card-title">사용자 관리</h4>
+        <p class="card-category">수정된 사용자 목록을 표시하고 관리할 수 있는 페이지.12명 이상이면 스크롤 발생</p>
       </div>
+      <label class="p-3">
+        검색
+        <input type="text" size="15" v-model="filterOrder.keyword" class="bg-gray-800 hover:bg-gray-700 border border-gray-700 px-4 py-2"/>
+      </label>
+      <button class="btn float-end btn-success" @click="addUser()">
+        Add
+      </button>
     </div>
-  </div>
+      <u-table class="table-hover table-striped"
+                :columns="table1.columns"
+                :data="table1.data"
+                @edit="updateUser"
+                @del="deleteUser">
+      </u-table>
+      <page-button :max-page="maxPage" v-model="currentPage" ></page-button>
+    </card>
 </template>
 <script>
   const tableColumns = ['id', '사용자id', '사용자명']

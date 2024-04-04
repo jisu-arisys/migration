@@ -1,6 +1,6 @@
 <!-- PagingButton.vue -->
 <template>
-  <div class="col-12 text-center">
+  <div class="text-center p-2">
     <div class="btn-group" role="group" aria-label="Basic outlined example">
       <button class="btn btn-success btn-sm" @click="changePage(1)" :disabled="modelValue === 1">
         &lt;&lt;

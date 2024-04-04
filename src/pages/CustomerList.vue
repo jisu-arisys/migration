@@ -1,35 +1,31 @@
 <template>
-  <div class="content">
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-12">
-          <card class="strpied-tabled-with-hover"
-                body-classes="table-full-width table-responsive"
-          >
-            <div class="p-3">
-              <slot class="header">
-                <h4 class="card-title">고객사 관리</h4>
-                <p class="card-category">등록된 고객사 목록을 표시하고 관리할 수 있는 페이지.</p>
-                <label class="p-3">
-                  검색
-                  <input type="text" size="15" v-model="filterOrder.keyword" class="bg-gray-800 hover:bg-gray-700 border border-gray-700 px-4 py-2"/>
-                </label>
-                    <button class="btn float-end btn-success btn-sm" @click="addCustomer()">
-                      Add
-                    </button>
-                  </slot>
-            </div>
-            <u-table class="table-hover table-striped"
-                     :columns="table1.columns"
-                     :data="table1.data"
-                     @edit="updateCustomer"
-                     @del="deleteCustomer"
-                     >
-            </u-table>
-            <page-button :max-page="maxPage" v-model="currentPage" ></page-button>
-          </card>
+  <div class="row">
+    <div class="col-12">
+      <card class="strpied-tabled-with-hover"
+            body-classes="table-full-width table-responsive"
+      >
+        <div class="px-3">
+          <slot class="header">
+            <h4 class="card-title">고객사 관리</h4>
+            <p class="card-category">등록된 고객사 목록을 표시하고 관리할 수 있는 페이지.</p>
+          </slot>
+          <label class="p-3">
+            검색
+            <input type="text" size="15" v-model="filterOrder.keyword" class="bg-gray-800 hover:bg-gray-700 border border-gray-700 px-4 py-2"/>
+          </label>
+          <button class="btn float-end btn-success btn-sm" @click="addCustomer()">
+            Add
+          </button>
         </div>
-      </div>
+        <u-table class="table-hover table-striped"
+                  :columns="table1.columns"
+                  :data="table1.data"
+                  @edit="updateCustomer"
+                  @del="deleteCustomer"
+                  >
+        </u-table>
+        <page-button :max-page="maxPage" v-model="currentPage" ></page-button>
+      </card>
     </div>
   </div>
 </template>
