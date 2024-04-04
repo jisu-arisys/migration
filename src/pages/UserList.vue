@@ -26,22 +26,6 @@
                      @del="deleteUser">
             </u-table>
             <page-button :max-page="maxPage" v-model="currentPage" ></page-button>
-
-              <!-- <div class="col-12 text-center">
-                <div class="btn-group" role="group" aria-label="Basic outlined example">
-                  <button class="btn btn-success btn-sm" @click="currentPage--" :disabled="currentPage === 1">
-                    &lt;
-                  </button>
-                  &nbsp;
-                  <button v-for="(index) in maxPage" :key="index+'p'" class="btn btn-success btn-sm" @click="currentPage=index">
-                    {{ index }}
-                  </button>
-                  &nbsp;
-                  <button class="btn btn-success btn-sm" @click="currentPage++" :disabled="currentPage === maxPage">
-                    &gt;
-                  </button>
-                </div>
-              </div> -->
           </card>
         </div>
       </div>

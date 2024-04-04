@@ -10,6 +10,10 @@
               <slot class="header">
                 <h4 class="card-title">고객사 관리</h4>
                 <p class="card-category">등록된 고객사 목록을 표시하고 관리할 수 있는 페이지.</p>
+                <label class="p-3">
+                  검색
+                  <input type="text" size="15" v-model="filterOrder.keyword" class="bg-gray-800 hover:bg-gray-700 border border-gray-700 px-4 py-2"/>
+                </label>
                     <button class="btn float-end btn-success btn-sm" @click="addCustomer()">
                       Add
                     </button>
@@ -22,6 +26,7 @@
                      @del="deleteCustomer"
                      >
             </u-table>
+            <page-button :max-page="maxPage" v-model="currentPage" ></page-button>
           </card>
         </div>
       </div>
@@ -71,13 +76,46 @@
           columns: [...tableColumns],
           data: [...tableData]
         },
-        table2: {
-          columns: [...tableColumns],
-          data: [...tableData]
+        filterOrder: {
+          keyword:""
         },
+        pageSize:3,
+        currentPage:1,
       }
     },
+    watch: {
+      currentPage: {
+        handler() {
+          this.updateTableData();
+        },
+        immediate: true
+      },
+      filterOrder: {
+        handler(){          
+          this.currentPage=1;
+          this.updateTableData();
+        },
+        deep: true,
+      },
+    },
+    computed:{
+      maxPage(){
+        return Math.ceil(this.searchedData.length / this.pageSize);
+      },
+      searchedData() {
+        //종속성 : tableData, filterOrder.keyword
+        let keywords = [this.filterOrder.customer, this.filterOrder.group, this.filterOrder.keyword];
+        const filterProps = ['id','customer', 'group', 'vdn', 'updateat'];
+        return this.$filter.applySearchFilters(tableData, keywords, filterProps);
+    },
+      paginatedData() {
+        return this.$filter.applyPaginatedData(this.searchedData, this.currentPage, this.pageSize);
+      },
+    },
     methods : {
+      updateTableData(){
+        this.table1.data = this.paginatedData;
+      },
       addCustomer(){
         if(confirm("고객사를 추가하시겠습니까?")){
           this.$router.push("/customerupdate/-1");
@@ -91,6 +129,9 @@
           console.log("deleteCustomer :" + row.id);
         }
       }
+    },
+    mounted(){
+      this.updateTableData();
     }
 }
 </script>

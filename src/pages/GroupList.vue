@@ -52,17 +52,7 @@
               @handle="togleGroup">
             </l-table>
             <br>
-              <div class="col-12 text-center">
-                <button class="btn btn-success btn-sm" @click="currentPage--" :disabled="currentPage === 1">
-                  &lt;
-                </button>&nbsp;
-                <button class="btn btn-success btn-sm" @click.stop>
-                  {{ currentPage }}
-                </button>&nbsp;
-                <button class="btn btn-success btn-sm" @click="currentPage++" :disabled="currentPage === maxPage">
-                  &gt;
-                </button>
-              </div>
+            <page-button :max-page="maxPage" v-model="currentPage" ></page-button>
             </card>
           </div>
           
