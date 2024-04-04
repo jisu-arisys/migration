@@ -92,11 +92,11 @@ const tableColumns = ['id', 'customer', 'group','vdn', 'updateat']
     },
       addCustomer(){
         if(confirm("고객사를 추가하시겠습니까?")){
-          this.$router.push("/admin/customerupdate/-1");
+          this.$router.push("/customerupdate/-1");
         }
       },
       updateCustomer(row){
-        this.$router.push("/admin/customerupdate/"+row.id);
+        this.$router.push("/customerupdate/"+row.id);
       },
       deleteCustomer(row){
         if(confirm(row.customer + "를 삭제하시겠습니까?")){

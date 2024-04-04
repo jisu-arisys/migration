@@ -77,7 +77,7 @@ export default {
             lastName: this.lastName,
             emailId: this.emailId,
           }).then(() => {
-            this.$router.push("/admin/userlist");
+            this.$router.push("/userlist");
           });
         } else {
           UserDataService.updateUser(this.id, {

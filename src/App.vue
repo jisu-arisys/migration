@@ -31,8 +31,13 @@ export default {
     return {
       sidebarLinks : [
         { name: 'Dashboard', icon: 'nc-icon nc-air-baloon', path: '/' },
-        { name: 'User list', icon: 'nc-icon nc-circle-09', path: '/u' },
-        { name: 'Customer list', icon: 'nc-icon nc-bank', path: '/v' },
+        { name: 'User', icon: 'nc-icon nc-circle-09', path: '/u' },
+        { name: 'Vdn', icon: 'nc-icon nc-bank', path: '/v' },
+        { name: 'User list', icon: 'nc-icon nc-circle-09', path: '/userlist' },
+        { name: 'Customer list', icon: 'nc-icon nc-bank', path: '/customerlist' },
+        { name: 'Group list', icon: 'nc-icon nc-time-alarm', path: '/grouplist' },
+        // { name: 'Test list', icon: 'nc-icon nc-bulb-63', path: '/testlist' },
+        // { name: 'Test Result', icon: 'nc-icon nc-bell-55', path: '/testresult' },
     ]
     }
   },
