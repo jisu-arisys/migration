@@ -3,6 +3,7 @@ import Card from './Card.vue';
 import TableBasic from './TableBasic.vue';
 import UTable from './TableUpdateDelete.vue';
 import TimeRadio from './TimeRadio.vue';
+import PageButton from "../globalComponent/PageButton";
 
 
 export default {
@@ -12,5 +13,6 @@ export default {
     app.component('LTable', TableBasic);//
     app.component('UTable', UTable);//
     app.component('TimeRadio', TimeRadio);//
+    app.component('PageButton', PageButton);//
   },
 };

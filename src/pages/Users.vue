@@ -1,9 +1,14 @@
 <template>
+  <div class="container">
+    <h3>All Users</h3>
+    <div v-if="message" class="alert alert-success">{{ this.message }}</div>
+    <div class="row">
+      <div class="col-11">
+      <button class="btn btn-success float-end" v-on:click="addUser()">Add</button>
+      </div>
+    </div>
     <div class="container">
-      <h3>All Users</h3>
-      <div v-if="message" class="alert alert-success">{{ this.message }}</div>
-      <div class="container">
-        <table class="table">
+      <table class="table">
           <thead>
             <tr>
               <th>First Name</th>
@@ -32,9 +37,7 @@
             </tr>
           </tbody>
         </table>
-        <div class="row">
-          <button class="btn btn-success" v-on:click="addUser()">Add</button>
-        </div>
+        <page-button :max-page="maxPage" v-model="currentPage" ></page-button>
       </div>
     </div>
   </template>
@@ -45,14 +48,52 @@
     name: "Users",
     data() {
       return {
+        datas: [],
         users: [],
         message: "",
+        filterOrder: {
+          keyword:""
+        },
+        pageSize:2,
+        currentPage:1,
       };
     },
-    methods: {
+    watch: {
+      currentPage: {
+        handler() { this.updateTableData(); },
+        immediate: true
+      },
+      filterOrder: {
+        handler(){          
+          this.currentPage=1;
+          this.updateTableData();
+        },
+        deep: true,
+      },
+    },
+    computed:{
+      maxPage(){
+        return Math.ceil(this.datas.length / this.pageSize);
+      },
+      searchedData() {
+        //종속성 : tableData, filterOrder.keyword
+        let keywords = [this.filterOrder.keyword];
+        const filterProps = ['firstName', 'lastName', 'emailId'];
+        return this.$filter.applySearchFilters(this.datas, keywords, filterProps);
+      },
+      paginatedData() {
+        console.log(this.$filter.applyPaginatedData(this.searchedData, this.currentPage, this.pageSize));
+        return this.$filter.applyPaginatedData(this.searchedData, this.currentPage, this.pageSize);
+      },
+    },
+    methods : {
+      updateTableData(){
+        this.users = this.paginatedData;
+      },
       refreshUsers() {
         UserDataService.retrieveAllUsers().then((res) => {
-          this.users = res.data;
+          this.datas = res.data;
+          this.updateTableData();
         });
       },
       addUser() {
@@ -70,5 +111,8 @@
     created() {
       this.refreshUsers();
     },
+    mounted() {
+      this.updateTableData();
+    }
   };
   </script>
